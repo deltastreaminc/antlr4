@@ -736,11 +736,15 @@ func NewBailErrorStrategy() *BailErrorStrategy {
 //
 func (b *BailErrorStrategy) Recover(recognizer Parser, e RecognitionException) {
 	context := recognizer.GetParserRuleContext()
-	for context != nil {
+	for {
 		context.SetException(e)
-		context = context.GetParent().(ParserRuleContext)
+		t := context.GetParent()
+		if t == nil {
+			break
+		}
+		context = t.(ParserRuleContext)
 	}
-	panic(NewParseCancellationException()) // TODO we don't emit e properly
+	panic(e)
 }
 
 // Make sure we don't attempt to recover inline if the parser

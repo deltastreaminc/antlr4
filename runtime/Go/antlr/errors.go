@@ -230,12 +230,3 @@ func (f *FailedPredicateException) formatMessage(predicate, message string) stri
 
 	return "failed predicate: {" + predicate + "}?"
 }
-
-type ParseCancellationException struct {
-}
-
-func NewParseCancellationException() *ParseCancellationException {
-	//	Error.call(this)
-	//	Error.captureStackTrace(this, ParseCancellationException)
-	return new(ParseCancellationException)
-}
