@@ -293,15 +293,15 @@ func (i *IntervalSet) toTokenString(literalNames []string, symbolicNames []strin
 	return names[0]
 }
 
-func (i *IntervalSet) ToTokens(literalNames []string, symbolicNames []string) []string {
-	names := make([]string, 0)
+func (i *IntervalSet) ToList() []int {
+	list := []int{}
 	for _, v := range i.intervals {
 		for j := v.Start; j < v.Stop; j++ {
-			names = append(names, i.elementName(literalNames, symbolicNames, j))
+			list = append(list, j)
 		}
 	}
 
-	return names
+	return list
 }
 
 func (i *IntervalSet) elementName(literalNames []string, symbolicNames []string, a int) string {
